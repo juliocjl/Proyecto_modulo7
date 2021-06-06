@@ -95,10 +95,8 @@
 				$conexion -> close();
 			}
 			/*echo '<br>';
-			echo 'Numero de menu: '. $productoID ."<br>";
-			echo 'Cantidad : '. $cantidadProd . "<br>";*/
-			
-			
+			echo 'Numero de menu: '. $productoID ."<br>";*/
+			echo 'Cantidad : '. $cantidadProd . "<br>";
 		?>
 		</div>
 
