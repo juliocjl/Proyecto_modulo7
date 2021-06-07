@@ -20,6 +20,17 @@ CREATE PROCEDURE SP_AltaCliente (
         VALUES (nombre, aPaterno, aMaterno, direccion, telefono, correo,contrasenia, fechaNac)
 ;
 
+-- Creacion de PS para llenar tabla pedidos
+-- CURDATE()
+CREATE PROCEDURE lb_addPedido ( IN client INT(11),
+                                IN code INT(11),
+                                IN cant INT(11),
+                                IN total FLOAT ) 
+    INSERT INTO pedidoDetalle( NoPedido, pedido_fecha, cliente, codigo, cantidad, precioTotal)
+    VALUES ( "", CURDATE(), client, code, cant, total);
+=======
+=======
+>>>>>>> master
 --Actualizar los datos del usuario
 CREATE PROCEDURE SP_ActualizarCliente(
 	in sp_NoCliente int(11),
@@ -45,7 +56,7 @@ update cliente
 ;
 
 CREATE PROCEDURE SP_BorrarCliente(in sp_idCliente INT(11))
-    delete from cliente where cliente_correo = sp_idCliente;
+    delete from cliente where NoCliente = sp_NoCliente;
 
 --Hice este compa por si el que esta arriba no te funciona por que a mi no me jalaba jajaja
 /*
@@ -64,6 +75,9 @@ INSERT INTO cliente(cliente_nombre,cliente_apaterno,cliente_amaterno,
 	VALUES (sp_nombre, sp_aPaterno, sp_aMaterno, sp_direccion,sp_correo,sp_contrasenia, sp_telefono, sp_fechaNac);
 ;
 */
+<<<<<<< HEAD
+>>>>>>> 3aad1cd00a14be2c744761897211faf103ad7f83
+=======
 
 -- Creacion de PS para llenar tabla pedidos
 -- CURDATE()
@@ -74,3 +88,50 @@ CREATE PROCEDURE lb_addPedido ( IN client INT(11),
     INSERT INTO pedidoDetalle( NoPedido, pedido_fecha, cliente, codigo, cantidad, precioTotal)
     VALUES ( "", CURDATE(), client, code, cant, total);
 --
+>>>>>>> master
+
+-- SP para dar de alta un nuevo registro en menu
+CREATE PROCEDURE SP_AltaMenu(
+	-- Establecemos los parametros de entrada
+	IN nombre VARCHAR(100),
+    IN precio DECIMAL(8,2),
+    IN tipo VARCHAR(100),
+    IN descripcion VARCHAR(100),
+    IN imagen VARCHAR(255)
+)
+	-- Insertamos el registro
+	INSERT INTO menu (menu_nombre,menu_precio,menu_tipo,menu_descripcion,menu_imagen)
+	VALUES (nombre,precio,tipo,descripcion,imagen)
+;
+
+-- SP para eliminar un registro en la tabla menu
+CREATE PROCEDURE SP_BajaMenu(
+	-- Establecemos los parametros de entrada
+	IN sp_codigo INT(11)
+)
+	-- Borramos el registro
+	DELETE FROM menu 
+	WHERE codigo = sp_codigo
+;
+
+
+-- SP para actualizar un registro en la tabla menu
+CREATE PROCEDURE SP_ActualizaMenu(
+	-- Establecemos los parametros de entrada
+	IN sp_codigo INT(11),
+	IN sp_nombre VARCHAR(100),
+    IN sp_precio DECIMAL(8,2),
+    IN sp_tipo VARCHAR(100),
+    IN sp_descripcion VARCHAR(100),
+    IN sp_imagen VARCHAR(255)
+)
+	-- Actualizamos el registro
+	UPDATE menu
+	SET 
+	 menu_nombre = sp_nombre,
+     menu_precio = sp_precio,
+     menu_tipo = sp_tipo,
+     menu_descripcion = sp_descripcion,
+     menu_imagen = sp_imagen
+	WHERE codigo = sp_codigo
+;
